@@ -1,4 +1,4 @@
-name: Test React Project
+name: Test and Deploy React Project
 on: push
 jobs:
   test:
@@ -31,3 +31,37 @@ jobs:
 
       - name: List checked-out files in simple-react-project directory
         run: ls -R simple-react-project # Verify contents of the project directory
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code from repo
+        uses: actions/checkout@v3
+        with:
+          sparse-checkout: |
+            .github
+            simple-react-project/package.json
+            simple-react-project/package-lock.json
+            simple-react-project/src
+
+      - name: List files
+        run: ls -R # Check if simple-react-project exists
+
+      - name: Install Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+        working-directory: simple-react-project
+
+      - name: Build Project
+        run: npm run build
+
+      - name: Deploy
+        run: |
+          for i in {10..1}; do
+            echo $i
+            sleep 0.5
+          done
+          echo "Deploy"
