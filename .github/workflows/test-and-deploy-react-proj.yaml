@@ -33,6 +33,7 @@ jobs:
         run: ls -R simple-react-project # Verify contents of the project directory
 
   deploy:
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Get code from repo
