@@ -1,5 +1,5 @@
 name: Test and Deploy React Project
-on: push
+on: [push, workflow_dispatch] #added multple events
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -33,7 +33,7 @@ jobs:
         run: ls -R simple-react-project # Verify contents of the project directory
 
   deploy:
-    needs: test
+    needs: test # we can add multiple dependency by [job1, job2, ....]
     runs-on: ubuntu-latest
     steps:
       - name: Get code from repo
