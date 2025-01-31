@@ -9,13 +9,15 @@ jobs:
         with:
           sparse-checkout: |
             .github
-            simple react project/src
+            "simple react project/src" # quote to preserve space
           sparse-checkout-cone-mode: false
+
       - name: Install Node
         uses: actions/setup-node@v3
         with:
           node-version: 20
       - name: Install dependencies
-        run: npm i --force
+        run: npm ci
+
       - name: Run Tests
         run: npm test
