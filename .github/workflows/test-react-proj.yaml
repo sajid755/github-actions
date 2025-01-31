@@ -9,16 +9,25 @@ jobs:
         with:
           sparse-checkout: |
             .github
-            simple-react-project/src
+            simple-react-project/package.json
             simple-react-project/package-lock.json
-          sparse-checkout-cone-mode: false
+            simple-react-project/src
+
+      - name: List files
+        run: ls -R # Check if simple-react-project exists
 
       - name: Install Node
         uses: actions/setup-node@v3
         with:
           node-version: 20
+
       - name: Install dependencies
-        run: npm ci
+        run: npm install
+        working-directory: simple-react-project
 
       - name: Run Tests
         run: npm test
+        working-directory: simple-react-project
+
+      - name: List checked-out files in simple-react-project directory
+        run: ls -R simple-react-project # Verify contents of the project directory
