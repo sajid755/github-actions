@@ -1,0 +1,21 @@
+name: Test React Project
+on: push
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code from repo
+        uses: actions/checkout@v3
+        with:
+          sparse-checkout: |
+            .github
+            simple react project/src
+          sparse-checkout-cone-mode: false
+      - name: Install Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+      - name: Install dependencies
+        run: npm ci
+      - name: Run Tests
+        run: npm test
