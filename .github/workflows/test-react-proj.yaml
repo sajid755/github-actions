@@ -9,7 +9,7 @@ jobs:
         with:
           sparse-checkout: |
             .github
-            "simple react project/src" # quote to preserve space
+            simple-react-project/src
           sparse-checkout-cone-mode: false
 
       - name: Install Node
