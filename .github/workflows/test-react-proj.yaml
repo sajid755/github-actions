@@ -10,6 +10,7 @@ jobs:
           sparse-checkout: |
             .github
             simple-react-project/src
+            simple-react-project/package-lock.json
           sparse-checkout-cone-mode: false
 
       - name: Install Node
